@@ -29,7 +29,7 @@
        <dependency>
            <groupId>com.javarush</groupId>
            <artifactId>desktop-game-engine</artifactId>
-           <version>1.0</version>
+           <version>1.0.0</version>
            <systemPath>${basedir}/lib/desktop-game-engine.jar</systemPath>
         </dependency>
 
