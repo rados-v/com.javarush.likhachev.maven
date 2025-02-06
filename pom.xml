@@ -26,12 +26,12 @@
             <version>18.0.1</version>
         </dependency>
 
-       <!--<dependency>
+       <dependency>
            <groupId>com.javarush</groupId>
            <artifactId>desktop-game-engine</artifactId>
            <version>1.0</version>
            <systemPath>${basedir}/lib/desktop-game-engine.jar</systemPath>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
