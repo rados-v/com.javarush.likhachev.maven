@@ -51,7 +51,6 @@
         </resources>
 
         <plugins>
-            <!-- Usual compilation -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -61,7 +60,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Run java-fx app over Maven -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -78,13 +76,13 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>  <!-- Путь к классу Main-->
+                            <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <Main-Class>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</Main-Class>  <!-- Путь к классу Main-->
+                            <Main-Class>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</Main-Class>
                         </manifest>
                         <manifestEntries>
                             <Rsrc-Main-Class>com.javarush.games.racer.RacerGame</Rsrc-Main-Class>
-                            <Class-Path>./</Class-Path>  <!-- Путь на котором JAR ищет наши зависимости в проекте-->
+                            <Class-Path>./</Class-Path>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -106,14 +104,14 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <outputDirectory>${project.build.directory}/libs</outputDirectory>  <!-- Упаковываем все jar библиотеки в деррикторию /libs-->
-                    <includeScope>compile</includeScope>   <!-- -->
+                    <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                    <includeScope>compile</includeScope>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>generate-resources</phase>  <!-- устанавливаем этап, на котором будет исполняться цель-->
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>copy-dependencies</goal>  <!-- устанавлиевам цель -->
+                            <goal>copy-dependencies</goal>
                         </goals>
                     </execution>
                 </executions>
