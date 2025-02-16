@@ -36,10 +36,20 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.8.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
+
+
     <build>
+        <resources>
+            <resource>
+                <directory>${project.build.directory}/libs</directory> <!-- Водим директорию как новый ресурс???? -->
+                <targetPath>lib/</targetPath>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- Usual compilation -->
             <plugin>
@@ -64,21 +74,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
+                <version>3.3.0</version>
                 <configuration>
-                    <finalName>new-jar-javarush-project</finalName>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <Class-Path>lib/desktop-game-engine.jar</Class-Path>
-                            <Main-Class>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</Main-Class>
-                            <manifestEntries>com.javarush.games.racer.RacerGame</manifestEntries>
+                            <addClasspath>true</addClasspath>  <!-- Путь к классу Main-->
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <Main-Class>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</Main-Class>  <!-- Путь к классу Main-->
                         </manifest>
+                        <manifestEntries>
+                            <Rsrc-Main-Class>com.javarush.games.racer.RacerGame</Rsrc-Main-Class>
+                            <Class-Path>./</Class-Path>  <!-- Путь на котором JAR ищет наши зависимости в проекте-->
+                        </manifestEntries>
                     </archive>
-                    <includes>
-                        <include>${project.basedir}/lib/desktop-game-engine.jar</include>
-                    </includes>
-                    <outputDirectory>${project.basedir}/lib/</outputDirectory>
                 </configuration>
             </plugin>
 
@@ -88,7 +96,7 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/*Strange*.java</exclude>
+                        <exclude>StrangeTest</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -98,10 +106,18 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                    <outputDirectory>${project.build.directory}/libs</outputDirectory>  <!-- Упаковываем все jar библиотеки в деррикторию /libs-->
+                    <includeScope>compile</includeScope>   <!-- -->
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>  <!-- устанавливаем этап, на котором будет исполняться цель-->
+                        <goals>
+                            <goal>copy-dependencies</goal>  <!-- устанавлиевам цель -->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>
